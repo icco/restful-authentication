@@ -1,4 +1,4 @@
-# "Restful Authentication Generator"
+# Restful Authentication Generator
 
 This widely-used plugin provides a foundation for securely managing user authentication:
 
@@ -59,7 +59,7 @@ from there.
 
 ***************************************************************************
 
-<a id="AWESOME"/> </a>
+<div id="AWESOME"/></div>
 
 ## Exciting new features
 
@@ -101,7 +101,7 @@ By default, email and usernames are validated against a somewhat strict pattern;
 
 ***************************************************************************
 
-<a id="INSTALLATION"/> </a>
+<div id="INSTALLATION"/></div>
 
 ## Installation
 
@@ -144,7 +144,7 @@ To use the generator:
  * --skip-routes: Don't generate a resource line in `config/routes.rb`
 
 ***************************************************************************
-<a id="POST-INSTALL"/> </a>
+<div id="POST-INSTALL"/></div>
 
 ## After installing
 

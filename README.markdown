@@ -41,10 +41,10 @@ This page has notes on
 
 See the [wiki](http://github.com/technoweenie/restful-authentication/wikis/home) (or the notes/ directory) if you want to learn more about:
 
- * "Extensions, Addons and Alternatives":addons such as HAML templates
- * "Security Design Patterns":security-patterns with "snazzy diagram":http://github.com/technoweenie/restful-authentication/tree/master/notes/SecurityFramework.png
+ * Extensions, Addons and Alternatives - addons such as HAML templates
+ * [Security Design Patterns](http://github.com/technoweenie/restful-authentication/tree/master/notes/SecurityFramework.png) -- security-patterns with "snazzy diagrams" 
  * Authentication -- Lets a visitor identify herself (and lay  claim to her corresponding Roles and measure of Trust)
- * "Trust Metrics":Trustification -- Confidence we can rely on the outcomes of this visitor's actions.
+ * Trust Metrics -- Trustification -- Confidence we can rely on the outcomes of this visitor's actions.
  * Authorization and Policy -- Based on trust and identity, what actions may this visitor perform?
  * Access Control -- How the Authorization policy is actually enforced in your code (A: hopefully without turning it into  a spaghetti of if thens)
  * Rails Plugins for Authentication, Trust,  Authorization and Access Control
@@ -53,7 +53,7 @@ See the [wiki](http://github.com/technoweenie/restful-authentication/wikis/home)
  * TODO -- Ideas for how you can help
 
 These best version of the release notes are in the notes/ directory in the
-"source code":http://github.com/technoweenie/restful-authentication/tree/master
+[source code](http://github.com/technoweenie/restful-authentication/tree/master)
 -- look there for the latest version.  The wiki versions are taken (manually)
 from there.
 
@@ -110,7 +110,7 @@ acts as authenticated.  Currently it requires Rails 1.2.6 or above.
 
 **IMPORTANT FOR RAILS > 2.1 USERS**
 
-To avoid a @NameError@ exception ([lighthouse tracker ticket](http://rails_security.lighthouseapp.com/projects/15332-restful_authentication/tickets/2-not-a-valid-constant-name-errors#ticket-2-2), check out the code to have an _underscore_ and not _dash_ in its name:
+To avoid a `NameError` exception ([lighthouse tracker ticket](http://rails_security.lighthouseapp.com/projects/15332-restful_authentication/tickets/2-not-a-valid-constant-name-errors#ticket-2-2), check out the code to have an _underscore_ and not _dash_ in its name:
 
  * either use `git clone git://github.com/technoweenie/restful-authentication.git restful_authentication`
  * or rename the plugin's directory to be <code>restful_authentication</code> after fetching it.
@@ -131,9 +131,9 @@ To use the generator:
 
  * --include-activation: Generates the code for a ActionMailer and its respective Activation Code through email.
 
- * --stateful: Builds in support for acts_as_state_machine and generates activation code.  (@--stateful@ implies @--include-activation@). Based on the idea at [[http://www.vaporbase.com/postings/stateful_authentication]]. Passing @--skip-migration@ will skip the user migration, and @--skip-routes@ will skip resource generation -- both useful if you've already run this generator.  (Needs the "acts_as_state_machine plugin":http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/, but new installs should probably run with @--aasm@ instead.)
+ * --stateful: Builds in support for acts_as_state_machine and generates activation code. (`--stateful` implies `--include-activation`). Based on the idea at <http://www.vaporbase.com/postings/stateful_authentication>. Passing `--skip-migration` will skip the user migration, and `--skip-routes` will skip resource generation -- both useful if you've already run this generator.  (Needs the [acts_as_state_machine plugin](http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/) but new installs should probably run with `--aasm` instead.)
 
- * --aasm: Works the same as stateful but uses the "updated aasm gem":http://github.com/rubyist/aasm/tree/master
+ * --aasm: Works the same as stateful but uses the [updated aasm gem](http://github.com/rubyist/aasm/tree/master)
 
  * --rspec: Generate RSpec tests and Stories in place of standard rails tests.  This requires the [RSpec and Rspec-on-rails plugins](http://rspec.info/) (make sure you `./script/generate rspec` after installing RSpec.) The rspec and story suite are much more thorough than the rails tests, and changes are unlikely to be backported.
 
@@ -141,7 +141,7 @@ To use the generator:
 
  * --skip-migration: Don't generate a migration file for this model
 
- * --skip-routes: Don't generate a resource line in @config/routes.rb@
+ * --skip-routes: Don't generate a resource line in `config/routes.rb`
 
 ***************************************************************************
 <a id="POST-INSTALL"/> </a>
@@ -149,20 +149,20 @@ To use the generator:
 ## After installing
 
 The below assumes a Model named 'User' and a Controller named 'Session'; please
-alter to suit. There are additional security minutae in @notes/README-Tradeoffs@
+alter to suit. There are additional security minutae in `notes/README-Tradeoffs`
 -- only the paranoid or the curious need bother, though.
 
-* Add these familiar login URLs to your @config/routes.rb@ if you like:
+* Add these familiar login URLs to your `config/routes.rb` if you like:
 
     map.signup  '/signup', :controller => 'users',   :action => 'new'
     map.login  '/login',  :controller => 'session', :action => 'new'
     map.logout '/logout', :controller => 'session', :action => 'destroy'
 
-* With @--include-activation@, also add to your @config/routes.rb@:
+* With `--include-activation`, also add to your `config/routes.rb`:
 
     map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
 
-  and add an observer to @config/environment.rb@:
+  and add an observer to `config/environment.rb`:
 
     config.active_record.observers = :user_observer
 
@@ -182,7 +182,7 @@ alter to suit. There are additional security minutae in @notes/README-Tradeoffs@
       end
     end
 
-* With @--stateful@, add an observer to config/environment.rb:
+* With `--stateful`, add an observer to config/environment.rb:
 
     config.active_record.observers = :user_observer
 

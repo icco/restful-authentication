@@ -152,17 +152,17 @@ The below assumes a Model named 'User' and a Controller named 'Session'; please 
 
  * Add these familiar login URLs to your `config/routes.rb` if you like:
 
-     map.signup  '/signup', :controller => 'users',   :action => 'new'
-     map.login  '/login',  :controller => 'session', :action => 'new'
-     map.logout '/logout', :controller => 'session', :action => 'destroy'
+      map.signup  '/signup', :controller => 'users',   :action => 'new'
+      map.login  '/login',  :controller => 'session', :action => 'new'
+      map.logout '/logout', :controller => 'session', :action => 'destroy'
 
  * With `--include-activation`, also add to your `config/routes.rb`:
 
-     map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+       map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
 
   and add an observer to `config/environment.rb`:
 
-     config.active_record.observers = :user_observer
+       config.active_record.observers = :user_observer
 
   Pay attention, may be this is not an issue for everybody, but if you should have problems, that the sent activation_code does match with that in the database stored, reload your user object before sending its data through email something like:
 
@@ -179,7 +179,7 @@ The below assumes a Model named 'User' and a Controller named 'Session'; please 
 
  * With `--stateful`, add an observer to config/environment.rb:
 
-     config.active_record.observers = :user_observer
+      config.active_record.observers = :user_observer
 
   and modify the users resource line to read
 

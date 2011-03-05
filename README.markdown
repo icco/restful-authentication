@@ -14,7 +14,7 @@ Several features were updated in May, 2008.
  * ['Classic' (backward-compatible) version](http://github.com/technoweenie/restful-authentication/tree/classic)
  * [Experimental version](http://github.com/technoweenie/restful-authentication/tree/modular) (Much more modular, needs testing &amp; review)
 
- > IMPORTANT: if you upgrade your site, existing user account passwords will stop working unless you use --old-passwords
+ > IMPORTANT: if you upgrade your site, existing user account passwords will stop working unless you use `--old-passwords`
 
 ***************************************************************************
 
@@ -93,7 +93,7 @@ but may require changes to existing accounts
 
 ### Passwords
 
-The new password encryption (using a site key salt and stretching) will break existing user accounts' passwords.  We recommend you use the --old-passwords option or write a migration tool and submit it as a patch.  See the <#Tradeoffs> note for more information.
+The new password encryption (using a site key salt and stretching) will break existing user accounts' passwords.  We recommend you use the `--old-passwords` option or write a migration tool and submit it as a patch.  See the <#Tradeoffs> note for more information.
 
 ### Validations
 
@@ -129,42 +129,42 @@ To use the generator:
 
  * The second parameter specifies the session controller name.  This is the controller that handles the actual login/logout function on the site.  (probably: "Session").
 
- * --include-activation: Generates the code for a ActionMailer and its respective Activation Code through email.
+ * `--include-activation`: Generates the code for a ActionMailer and its respective Activation Code through email.
 
- * --stateful: Builds in support for acts_as_state_machine and generates activation code. (`--stateful` implies `--include-activation`). Based on the idea at <http://www.vaporbase.com/postings/stateful_authentication>. Passing `--skip-migration` will skip the user migration, and `--skip-routes` will skip resource generation -- both useful if you've already run this generator.  (Needs the [acts_as_state_machine plugin](http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/) but new installs should probably run with `--aasm` instead.)
+ * `--stateful`: Builds in support for acts_as_state_machine and generates activation code. (`--stateful` implies `--include-activation`). Based on the idea at <http://www.vaporbase.com/postings/stateful_authentication>. Passing `--skip-migration` will skip the user migration, and `--skip-routes` will skip resource generation -- both useful if you've already run this generator.  (Needs the [acts_as_state_machine plugin](http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/) but new installs should probably run with `--aasm` instead.)
 
- * --aasm: Works the same as stateful but uses the [updated aasm gem](http://github.com/rubyist/aasm/tree/master)
+ * `--aasm`: Works the same as stateful but uses the [updated aasm gem](http://github.com/rubyist/aasm/tree/master)
 
- * --rspec: Generate RSpec tests and Stories in place of standard rails tests.  This requires the [RSpec and Rspec-on-rails plugins](http://rspec.info/) (make sure you `./script/generate rspec` after installing RSpec.) The rspec and story suite are much more thorough than the rails tests, and changes are unlikely to be backported.
+ * `--rspec`: Generate RSpec tests and Stories in place of standard rails tests.  This requires the [RSpec and Rspec-on-rails plugins](http://rspec.info/) (make sure you `./script/generate rspec` after installing RSpec.) The rspec and story suite are much more thorough than the rails tests, and changes are unlikely to be backported.
 
- * --old-passwords: Use the older password scheme (see <#COMPATIBILITY>, above)
+ * `--old-passwords`: Use the older password scheme (see <#COMPATIBILITY>, above)
 
- * --skip-migration: Don't generate a migration file for this model
+ * `--skip-migration`: Don't generate a migration file for this model
 
- * --skip-routes: Don't generate a resource line in `config/routes.rb`
+ * `--skip-routes`: Don't generate a resource line in `config/routes.rb`
 
 ***************************************************************************
 <div id="POST-INSTALL"/></div>
 
 ## After installing
 
-The below assumes a Model named 'User' and a Controller named 'Session'; please alter to suit. There are additional security minutae in `notes/README-Tradeoffs` -- only the paranoid or the curious need bother, though.
+The below assumes a Model named 'User' and a Controller named 'Session'; please alter to suit. There are additional security minutiae in `notes/README-Tradeoffs` -- only the paranoid or the curious need bother, though.
 
  * Add these familiar login URLs to your `config/routes.rb` if you like:
 
-      map.signup  '/signup', :controller => 'users',   :action => 'new'
-      map.login  '/login',  :controller => 'session', :action => 'new'
-      map.logout '/logout', :controller => 'session', :action => 'destroy'
+    map.signup  '/signup', :controller => 'users',  :action => 'new'
+    map.login  '/login',  :controller => 'session', :action => 'new'
+    map.logout '/logout', :controller => 'session', :action => 'destroy'
 
  * With `--include-activation`, also add to your `config/routes.rb`:
 
-       map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+    map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
 
-  and add an observer to `config/environment.rb`:
+and add an observer to `config/environment.rb`:
 
-       config.active_record.observers = :user_observer
+    config.active_record.observers = :user_observer
 
-  Pay attention, may be this is not an issue for everybody, but if you should have problems, that the sent activation_code does match with that in the database stored, reload your user object before sending its data through email something like:
+Pay attention, may be this is not an issue for everybody, but if you should have problems, that the sent activation_code does match with that in the database stored, reload your user object before sending its data through email something like:
 
      class UserObserver < ActiveRecord::Observer
        def after_create(user)
@@ -177,14 +177,14 @@ The below assumes a Model named 'User' and a Controller named 'Session'; please 
        end
      end
 
- * With `--stateful`, add an observer to config/environment.rb:
+ * With `--stateful`, add an observer to `config/environment.rb`:
 
-      config.active_record.observers = :user_observer
+    config.active_record.observers = :user_observer
 
-  and modify the users resource line to read
+and modify the users resource line to read
 
      map.resources :users, :member => { :suspend   => :put,
                                         :unsuspend => :put,
                                         :purge     => :delete }
 
-* If you use a public repository for your code (such as github, rubyforge, gitorious, etc.) make sure to NOT post your site_keys.rb (add a line like '/config/initializers/site_keys.rb' to your .gitignore or do the svn ignore dance), but make sure you DO keep it backed up somewhere safe.
+ * If you use a public repository for your code (such as github, rubyforge, gitorious, etc.) make sure to NOT post your site_keys.rb (add a line like `/config/initializers/site_keys.rb` to your `.gitignore` or do the svn ignore dance), but make sure you DO keep it backed up somewhere safe.

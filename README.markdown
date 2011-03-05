@@ -179,7 +179,7 @@ Pay attention, may be this is not an issue for everybody, but if you should have
 
  * With `--stateful`, add an observer to `config/environment.rb`:
 
-     config.active_record.observers = :user_observer
+       config.active_record.observers = :user_observer
 
 and modify the users resource line to read
 
